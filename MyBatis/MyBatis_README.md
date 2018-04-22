@@ -29,3 +29,4 @@ log4j.logger.org.apache=INFO
 ```
 
 ### 4、MyBatis的XML配置文件中配置信息使用OGNL语言，部分类似EL语言
+- OGNL中特殊字符进行转义：例如：&=>&quot;
