@@ -42,6 +42,27 @@ public class MessageDao {
 		return messageList;
 	}
 
+	/**
+	 * 单条删除
+	 */
+	public void deleteOne(int id) {
+		DBAccess dbAccess = new DBAccess();
+		SqlSession sqlSession = null;
+		try {
+			sqlSession = dbAccess.getSqlSession();
+			// 通过SQLSession执行SQl语句
+			sqlSession.delete("Message.deleteOne", id);
+			// MyBatis有事务，删除操作时需要手动提交事务
+			sqlSession.commit();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (sqlSession != null) {
+				sqlSession.close();
+			}
+		}
+	}
+
 	public static void main(String[] args) {
 		MessageDao messageDao = new MessageDao();
 		messageDao.queryMessageList("", "");
