@@ -4,7 +4,8 @@
 - 创建数据库连接时需要添加一些信息，SSL、时区等
 
 ### 2、MyBatis的配置信息
-配置信息一般可以在下载源码中包括，路径为：mybatis-3-mybatis-3.4.6\src\test\java\org\apache\ibatis\submitted\complex_property
+配置信息一般可以在下载源码中包括，路径为：
+> mybatis-3-mybatis-3.4.6\src\test\java\org\apache\ibatis\submitted\complex_property
 - Configuration.xml  MyBatis链接相关配置信息
 - User.xml 实体类的配置信息
 
