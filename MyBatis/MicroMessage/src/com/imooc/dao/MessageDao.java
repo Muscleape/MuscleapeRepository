@@ -63,6 +63,25 @@ public class MessageDao {
 		}
 	}
 
+	/**
+	 * 批量删除
+	 */
+	public void deleteBatch(List<Integer> ids) {
+		DBAccess dbAccess = new DBAccess();
+		SqlSession sqlSession = null;
+		try {
+			sqlSession = dbAccess.getSqlSession();
+			sqlSession.delete("Message.deleteBatch", ids);
+			sqlSession.commit();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (sqlSession != null) {
+				sqlSession.close();
+			}
+		}
+	}
+
 	public static void main(String[] args) {
 		MessageDao messageDao = new MessageDao();
 		messageDao.queryMessageList("", "");

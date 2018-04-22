@@ -10,18 +10,18 @@ import javax.servlet.http.HttpServletResponse;
 import com.imooc.service.MaintainService;
 
 /**
- * 单条删除控制层
+ * 批量删除控制层
  */
 @SuppressWarnings("serial")
-public class DeleteOneServlet extends HttpServlet {
+public class DeleteBatchServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// 设置编码
 		req.setCharacterEncoding("UTF-8");
 		// 接受页面的值
-		String id = req.getParameter("id");
+		String[] ids = req.getParameterValues("id");
 		MaintainService maintainService = new MaintainService();
-		maintainService.deleteOne(id);
+		maintainService.deleteBatch(ids);
 		// 页面跳转
 		req.getRequestDispatcher("/List.action").forward(req, resp);
 	}

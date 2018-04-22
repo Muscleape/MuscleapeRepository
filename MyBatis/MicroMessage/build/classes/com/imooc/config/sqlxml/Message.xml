@@ -33,7 +33,16 @@
 		</if>
 	</select>
 	<delete id="deleteOne" parameterType="int">
-	delete from MESSAGE where ID = #{_parameter}
+		delete from MESSAGE where
+		ID = #{_parameter}
+	</delete>
+
+	<delete id="deleteBatch" parameterType="java.util.List">
+		delete from MESSAGE where ID in (
+		<foreach collection="list" item="item" separator=",">
+			#{item}
+		</foreach>
+		)
 	</delete>
 
 </mapper>
