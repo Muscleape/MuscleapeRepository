@@ -27,3 +27,5 @@ log4j.appender.Console.layout.ConversionPattern=%d [%t] %-5p [%c] - %m%n
 # org.apache包名，为当前包设置特殊的日志输出属性
 log4j.logger.org.apache=INFO
 ```
+
+### 4、MyBatis的XML配置文件中配置信息使用OGNL语言，部分类似EL语言
