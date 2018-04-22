@@ -16,7 +16,7 @@
 # debug,info,warn,error（级别低到高）
 log4j.rootLogger=DEBUG,Console
 log4j.appender.Console=org.apache.log4j.ConsoleAppender
-log4j.appender.Console.layout=org.log4j.PatternLayout
+log4j.appender.Console.layout=org.apache.log4j.PatternLayout
 # %d日志时间
 # %t日志所处线程的线程名称
 # %p输出日志的级别（debug,info,warn,error） 5p输出的字符占5位 -5p不足5位的在右侧补空位
@@ -27,3 +27,6 @@ log4j.appender.Console.layout.ConversionPattern=%d [%t] %-5p [%c] - %m%n
 # org.apache包名，为当前包设置特殊的日志输出属性
 log4j.logger.org.apache=INFO
 ```
+
+### 4、MyBatis的XML配置文件中配置信息使用OGNL语言，部分类似EL语言
+- OGNL中特殊字符进行转义：例如：&=>&quot;
