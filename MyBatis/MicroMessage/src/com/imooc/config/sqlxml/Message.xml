@@ -29,7 +29,7 @@
 		</if>
 		<if
 			test="description != null and !&quot;&quot;.equals(description.trim())">
-			and DESCRIPTION like '%'#{description}'%'
+			and DESCRIPTION like '%' #{description} '%'
 		</if>
 	</select>
 

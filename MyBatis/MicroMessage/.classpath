@@ -20,6 +20,6 @@
 			<attribute name="source_encoding" value="UTF-8"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/log4j-core-2.11.0.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/log4j-1.2.17.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
