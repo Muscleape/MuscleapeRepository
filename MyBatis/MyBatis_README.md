@@ -41,3 +41,69 @@ log4j.logger.org.apache=INFO
 
 ### 4、MyBatis的XML配置文件中配置信息使用OGNL语言，部分类似EL语言
 - OGNL中特殊字符进行转义：例如：&  => \&quot\;
+
+### 5、\<where>标签
+- 当标签内的内容满足条件时，拼接where条件语句
+- 后面多个条件时，自动删除最开始的and或or关键字，保证sql语句正确
+
+
+### 6、\<sql>标签
+ - 类似与Java中的常量定义
+ - 作用：类似与字段名这种常用的，可以设置到一个sql中，用的时候直接应用该常量，不需要每个地方都写一遍所有的字段名
+
+### 7、\<set>标签
+- 代替SQL中的set关键字
+- 满足条件时，拼接set关键字
+- 多个字段时，自动删掉最后一个字段的“,”(逗号)
+
+### 8、\<trim>标签
+- 具有组合功能
+- 可以代替\<where>标签或\<set>标签
+- \<where>标签的等效表示\<trim prefix="where" prefixOverrides="and/or">
+- \<set>标签的等效表示\<trim prefix="set" suffixOverrides=",">
+
+### 9、\<choose>标签
+- 作用类似java中的 if else结构或者是switch case结构
+
+```
+<choose>
+    <when test=""></when>
+    <when test=""></when>
+    <when test=""></when>
+    <when test=""></when>
+    <otherwise></otherwise>
+</choose>
+```
+
+### 10、主从表
+- 主表中，存储子表的一个集合，使用\<collention>标签
+- 子表中，有一个字段，关联到主表，使用\<association>标签
+
+### 11、SQL中的增删改查对应的标签
+- insert
+- delete
+- update
+- select
+
+### 12、\<resultMap>标签
+- 配置java对象属性与查询结果集中列表对应关系
+
+### 13、控制动态SQL拼接
+- 循环 \<foreach>标签
+- 条件 \<if>标签
+- 多条件判断 \<choose>标签
+
+### 14、格式化输出
+- \<where>
+- \<set>
+- \<trim>
+
+### 15、配置关联关系（一对多及多对一等）
+- \<collection>
+- \<association>
+
+### 16、\<sql>标签
+- 定义常量
+
+### 17、\<include>标签
+- 引用\<sql>标签定义的常量
