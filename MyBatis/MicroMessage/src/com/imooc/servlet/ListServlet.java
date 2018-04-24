@@ -1,12 +1,6 @@
 package com.imooc.servlet;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -15,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.imooc.bean.Message;
-import com.imooc.service.ListService;
+import com.imooc.service.QueryService;
 
 /**
  * 列表页面初始化控制
@@ -36,7 +30,7 @@ public class ListServlet extends HttpServlet {
 		req.setAttribute("command", command);
 		req.setAttribute("description", description);
 
-		ListService listService = new ListService();
+		QueryService listService = new QueryService();
 		// 查询消息列表并转给页面
 		List<Message> messageList = listService.queryMessageList(command, description);
 		req.setAttribute("messageList", messageList);

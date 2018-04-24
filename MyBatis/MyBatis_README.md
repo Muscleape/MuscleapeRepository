@@ -1,7 +1,18 @@
+# [内容整理在GitHub，点击查看](https://github.com/Muscleape/TestDemoProjects/tree/master/MyBatis)
+
 ### 1、关于JDBC
 项目中使用了8.0.9版本的JDBC，在配置JDBC相关的数据库连接时，与老版本的有一些不同
-- 包名改变了
+- 包名改变了，添加了一个cj
+```
+（Class.forName("com.mysql.cj.jdbc.Driver");）
+```
 - 创建数据库连接时需要添加一些信息，SSL、时区等
+```
+Connection conn = DriverManager.getConnection(
+"jdbc:mysql://127.0.0.1:3306/message?serverTimezone=GMT&autoReconnect=true&useSSL=true",
+"root",
+"root");
+```
 
 ### 2、MyBatis的配置信息
 配置信息一般可以在下载源码中包括，路径为：
@@ -29,4 +40,4 @@ log4j.logger.org.apache=INFO
 ```
 
 ### 4、MyBatis的XML配置文件中配置信息使用OGNL语言，部分类似EL语言
-- OGNL中特殊字符进行转义：例如：&=>&quot;
+- OGNL中特殊字符进行转义：例如：&  => \&quot\;
