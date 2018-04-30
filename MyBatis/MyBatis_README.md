@@ -1,4 +1,4 @@
-# [内容整理在GitHub，点击查看](https://github.com/Muscleape/TestDemoProjects/tree/master/MyBatis)
+# [内容整理在GitHub，地址https://github.com/Muscleape/TestDemoProjects](https://github.com/Muscleape/TestDemoProjects/tree/master/MyBatis)
 
 ### 1、关于JDBC
 项目中使用了8.0.9版本的JDBC，在配置JDBC相关的数据库连接时，与老版本的有一些不同
