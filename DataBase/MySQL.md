@@ -1,4 +1,4 @@
-# [内容整理在GitHub，地址https://github.com/Muscleape/TestDemoProjects](https://github.com/Muscleape/TestDemoProjects/tree/master/DataBase)
+# [内容整理在GitHub，地址https://github.com/Muscleape/TestDemoProjects](https://github.com/Muscleape/TestDemoProjects/tree/master/DataBase/MySQL.md)
 ### MySQL分页查询
 
 > limit的用法
