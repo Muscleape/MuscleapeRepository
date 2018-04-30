@@ -140,3 +140,13 @@ parameterMap|parameterType
 
 ${}的优势
 - 因为原样输出，可以用作SQL中的字段，例如：order by ${字段名}
+
+### 21、MyBatis处理自增主键字段
+ - \<insert>标签中添加属性值【useGeneratedKeys="true" keyProperty="id"】
+ - useGeneratedKeys说明需要生成自增主键
+ - keyProperty指定了生成的主键存到参数对象的那个属性字段中
+
+ ### 22、找不到namespace.id的异常效果
+
+ - MyBatis的总的配置文件容易遗漏，没有引用对应属性对象的XML文件，查看总配置文件遗漏后的异常信息；
+ - SQLSession中调用XML中的namespace时，拼写错写；
