@@ -31,7 +31,10 @@ public class MessageDao {
 			message.setCommand(command);
 			message.setDescription(description);
 			// 通过SQLSession执行SQl语句
-			messageList = sqlSession.selectList("Message.queryMessageList", message);
+			// messageList = sqlSession.selectList("Message.queryMessageList", message);
+			// 改为面向接口式的调用，只需要增加一个MyBatis方法的接口【这里使用的是IMessage】，不需要写接口的实现类，接口的实现类由MyBatis自动完成
+			IMessage imessage = sqlSession.getMapper(IMessage.class);
+			messageList = imessage.queryMessageList(message);
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {

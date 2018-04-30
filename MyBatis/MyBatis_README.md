@@ -150,3 +150,19 @@ ${}的优势
 
  - MyBatis的总的配置文件容易遗漏，没有引用对应属性对象的XML文件，查看总配置文件遗漏后的异常信息；
  - SQLSession中调用XML中的namespace时，拼写错写；
+
+### 23、MyBatis中的接口式编程
+
+MyBatis中通过SQLSession直接调用SQL执行的方式是：
+```
+// 通过SQLSession执行SQl语句
+messageList = sqlSession.selectList("Message.queryMessageList", message);
+```
+这种方式存在几个问题：
+1. 参数1是namespace的名称及调用的xml中方法的名称，容易存在拼写错误的问题 
+2. 参数二指定了参数对象的类型，需要与xml中指定的parameterType类型严格对应
+3. 返回值的类型需要与xml中指定的resultMap严格对应
+4. 通过查看SQLSession的selectList方法，如果以上三处在代码中写错，代码在编译时不会出现任何的问题，但是在执行时，因为类型的问题会导致报错
+
+改进措施，使用接口式的编程，在接口中已方法的方式指定对应的参数及返回值类型；
+- 在MyBatis与Spring结合使用的程序中，大量的配置文件均由Spring的配置实现，其中会有大量的接口；
