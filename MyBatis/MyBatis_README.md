@@ -107,3 +107,36 @@ log4j.logger.org.apache=INFO
 
 ### 17、\<include>标签
 - 引用\<sql>标签定义的常量
+
+### 18、resultMap和ResultType
+
+ 相同点：
+- 都是指定结果集与Java对象之间关系的，处理查询结果集，映射为Java对象
+
+ 不同点：
+resultMap | resultType
+----------|-----------
+适用于返回值类型是自定义的实体类的情况，实体类的属性在标签\<resultMap>中指定|适用于返回值类型是JAVA提供的类型的情况，例如"java.util.Map"、"long"、"java.lang.String"等
+
+### 19、parameterMap和parameterType
+
+相同点：
+- 指定sql中查询查询参数
+不同点：
+
+parameterMap|parameterType
+--------|------
+已不推荐使用|直接将查询参数映射到对应的java对象上去
+
+### 20、#{}和${}
+
+#{} | ${}
+----|----
+被MyBatis解析成预编译的【?】，然后通过PreparedStatement赋值为对应的变量值|直接将变量值拼接在对应的位置，没有预编译效果，使用位置要加单引号
+
+#{}的优势
+- 有预编译的效果，多次执行同一个SQL（只是变量值不同）时，有性能上的优势；
+- 可以防止SQL注入
+
+${}的优势
+- 因为原样输出，可以用作SQL中的字段，例如：order by ${字段名}
