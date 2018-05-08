@@ -3,7 +3,7 @@
 > 整理之前的小代码片段，放到博客，便于以后完善查看；
 > 该JS导航树实际效果，【GSP+社区网站专题课程页面导航树】地址：http://gsp.inspur.com/knowledge/zhuanti/gsp_dev_topics
 
-```
+``` js
 <!DOCTYPE html>
 <html lang="en">
 

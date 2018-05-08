@@ -3,11 +3,11 @@
 ### 1、关于JDBC
 项目中使用了8.0.9版本的JDBC，在配置JDBC相关的数据库连接时，与老版本的有一些不同
 - 包名改变了，添加了一个cj
-```
-（Class.forName("com.mysql.cj.jdbc.Driver");）
+```java
+Class.forName("com.mysql.cj.jdbc.Driver");
 ```
 - 创建数据库连接时需要添加一些信息，SSL、时区等
-```
+```java
 Connection conn = DriverManager.getConnection(
 "jdbc:mysql://127.0.0.1:3306/message?serverTimezone=GMT&autoReconnect=true&useSSL=true",
 "root",
@@ -65,7 +65,7 @@ log4j.logger.org.apache=INFO
 ### 9、\<choose>标签
 - 作用类似java中的 if else结构或者是switch case结构
 
-```
+```xml
 <choose>
     <when test=""></when>
     <when test=""></when>
@@ -154,7 +154,7 @@ ${}的优势
 ### 23、MyBatis中的接口式编程
 
 MyBatis中通过SQLSession直接调用SQL执行的方式是：
-```
+```java
 // 通过SQLSession执行SQl语句
 messageList = sqlSession.selectList("Message.queryMessageList", message);
 ```

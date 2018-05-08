@@ -5,7 +5,7 @@
 
 - limit子句可以被用于强制select语句返回指定的记录数；
 - 接受1个或2个整数常量做参数，第一个是返回记录行的**偏移量**，第二个是返回记录行的**最大数目**
-```
+```sql
 -- 检索记录行6~15；
 mysql> SELECT * FROM table LIMIT 5,10;
 -- 从某个偏移量到记录集的最后，可以指定第二个参数为-1；
@@ -17,12 +17,12 @@ mysql> SELECT * FROM table LIMIT 5;
 > MySQL分页查询语句的性能分析
 
 - 确保使用索引，下列语句中在ta_id和id两列上建立索引
-```
+```sql
 mysql> SELECT * FROM ta WHERE ta_id = 111 ORDER BY id LIMIT 50,10;
 ```
 
 - **使用子查询**，随着数据量增加，越往后LIMIT语句的偏移量就会越大，速度会明显变慢；
-```
+```sql
 -- 使用子查询之前，偏移量为10000;
 mysql> SELECT * FROM ta WHERE ta_id = 123 ORDER BY id LIMIT 10000, 10;
 -- 使用子查询之后;

@@ -1,6 +1,6 @@
 ### 1、查看最近SQL执行记录
 
-``` sql
+```sql
 SELECT TOP 1000
 --创建时间
 QS.creation_time,

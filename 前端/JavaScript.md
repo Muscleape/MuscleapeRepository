@@ -10,7 +10,7 @@
 
 ### 程序源码
 
-``` html
+``` javascript
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 
@@ -110,7 +110,7 @@ document.getElementById('broType').value = broName;
 
 ### 获取浏览器详细信息
 
-``` html
+``` js
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
