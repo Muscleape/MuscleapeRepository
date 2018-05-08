@@ -1,3 +1,5 @@
+# Java核心技术36讲笔记
+
 ### 1、JRE和JDK
 - JRE（Java Runtime Environment），包含JVM和Java类库，以及一些模块等；
 - JDK（Java Development Kit），JRE的超集，提供了更多的工具，例如：编译器、各种诊断工具等；
