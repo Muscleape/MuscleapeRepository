@@ -24,6 +24,12 @@
 - final类不能被继承，所以其功能一般是完整的。Java中String、Integer一级其他包装类都是final类型的
 - final变量经常和static关键字一起使用，作为常量
 
+> 使用场景
+
+- 不允许扩展的类，定义类的时候添加final修饰符；
+- 类中的方法使用final修饰符时，子类就不能覆盖这个方法（final类中的所有方法自动成为final方法）；
+- 将方法或类声明为final的目的：确保他们不会在子类中改变语义；
+
 ## 3.为什么String类是不可变的
 
 - String类使用final修饰符
@@ -62,3 +68,63 @@ catch(IOException | SQLException | Exception ex){
      throw new MyException(ex.getMessage());
 }
 ```
+
+## 6、super和this
+
+super不是一个对象的引用，不能将super赋给另一个对象变量，super只是一个指示编译器调用超累方法的特殊关键字。
+
+## 7、方法签名
+
+方法的名字和参数列表成为方法的签名，返回类型不是签名的一部分。
+
+## 8、String
+
+```java
+//直接量字符串对象
+String s="hello world";
+```
+
+- 由String声明的字符串长度不可变；
+- 上面代码创建时，JVM的栈内存中产生一个s变量，堆内存中产生hello world字符串对象。s指向hello world的地址；
+- 上面代码属于直接量字符串对象，JVM处理时，会进行缓存，产生时放入字符串池，再次使用时不会重新创建，而是直接指向已存在的字符串；
+
+```java
+String s2  = "hello world";
+```
+
+```java
+//s2与s都是直接量字符串对象“hello world”，s与s2都指向同一个字符串
+System.out.println( s == s2);
+//上述代码返回值为“true”，即s和s2指向同一个地址
+```
+
+- 当一个String对象完成创建后，该对象的内容就固定下来了
+
+```java
+//下面代码中str只是个引用变量，str指向的对象在不断变化，最初的对象没有改变
+String str = "I like";
+str = str + "java";
+```
+
+- String类提供了16中构造方法，常用的5种：
+
+```java
+//1、String()----初始化一个String对象，表示一个空字符序列
+String s = new String();
+//2、String(String value)----利用一个直接量创建一个新串
+String s1 = new String("hello");
+//3、String(char[] value)----利用一个字符数组创建
+char[] c = {'h','e','l','l','o'};
+String s2 = new String(c);
+//4、String(char[] value,int offset,int count)----截取字符数组，从offset开始count个字符创建
+String s3 = new String(c,1,3);
+//5、String(StringBuffer buffer)----利用StringBuffer创建
+```
+
+- 以下代码在内存中产生几个字符串对象
+
+```java
+String s = "123" + "456";
+```
+
+**解答**：由于Java字符串的缓存机制，编译器在编译的时候会进行优化，在编译的过程中两个字符串会被合并成一个“123456”。如果在缓存池中目前没有123456这个对象，会产生一个，且栈中产生一个引用s指向它。如果缓存池中已存在“123456”，将产生0个对象，直接用s指向它。
