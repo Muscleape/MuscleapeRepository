@@ -1,6 +1,9 @@
- > **不同浏览器版本可能存在差异，使用时请测试自己的环境**
+# JS获取浏览器信息
 
-### 测试时各个浏览器版本
+> **不同浏览器版本可能存在差异，使用时测试自己的环境**
+
+## 测试时各个浏览器版本
+
 - IE: 11.953.14393.0
 - Edge: Microsoft Edge 38.14393.0.0;Microsoft EdgeHTML 14.14393
 - Chrome: 57.0.2987.133 (64-bit)
@@ -8,9 +11,9 @@
 - 360极速浏览器： 版本号:8.7.0.306;内核版本号:50.0.2661.102
 - 360安全浏览器： 版本号:8.1.1.400;内核版本号:45.0.2454.101
 
-### 程序源码
+## 程序源码
 
-``` javascript
+```html
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 
@@ -74,7 +77,7 @@ broName = '360安全浏览器-极速模式';
 }else{
 is360 = true;
 broName = '360极速浏览器-极速模式';
-} 
+}
 }
 
 //360兼容
@@ -108,9 +111,9 @@ document.getElementById('broType').value = broName;
 </html>
 ```
 
-### 获取浏览器详细信息
+## 获取浏览器详细信息
 
-``` js
+```html
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -133,7 +136,7 @@ var cookieEnabled = navigator.cookieEnabled; // 返回用户浏览器是否启�
 var cpuClass = navigator.cpuClass; //返回用户计算机的cpu的型号，通常intel芯片返回"x86"（火狐没有）
 
 var mimeType = navigator.mimeTypes; // 浏览器支持的所有MIME类型的数组
-var platform = navigator.platform; // 浏览器正在运行的操作系统平台，包括Win16(windows3.x) 
+var platform = navigator.platform; // 浏览器正在运行的操作系统平台，包括Win16(windows3.x)
 // Win32(windows98,Me,NT,2000,xp),Mac68K(Macintosh 680x0)
 // 和ＭacPPC(Macintosh PowerPC)
 var plugins = navigator.plugins; // 安装在浏览器上的所有插件的数组
@@ -213,9 +216,6 @@ info += "<tr><td>字体是否平滑：</td><td>" + window.screen.fontSmoothingEn
 info += "</table>";
 document.getElementById("elInfo").innerHTML = info;
 return info;
-
- 
-
 }
 //获取插件所有的名称
 function getPluginName() {
@@ -254,15 +254,11 @@ var i = navigator.userAgent.toLowerCase().indexOf("firefox");
 return i >= 0;
 }
 
- 
-
- 
-
 /******************************************以上为浏览器信息，以下为pc信息************************************************/
 var locator = new ActiveXObject("WbemScripting.SWbemLocator");
 var service = locator.ConnectServer(".");
 
-function cpuInfo() { //CPU 信息 
+function cpuInfo() { //CPU 信息
 var properties = service.ExecQuery("SELECT * FROM Win32_Processor");
 var e = new Enumerator(properties);
 var info = "<table border=1>";
@@ -283,7 +279,7 @@ info += "</table>";
 return info;
 }
 
-function softDisk() { //软盘信息 
+function softDisk() { //软盘信息
 var properties = service.ExecQuery("SELECT * FROM Win32_FloppyDrive");
 var e = new Enumerator(properties);
 var info = "<table border=1>";
@@ -299,7 +295,7 @@ info += "</table>";
 return info;
 }
 
-function RomInfo() { //CD-ROM 信息 
+function RomInfo() { //CD-ROM 信息
 var properties = service.ExecQuery("SELECT * FROM Win32_CDROMDrive");
 var e = new Enumerator(properties);
 var info = "<table border=1>";
@@ -316,7 +312,7 @@ info += "</table>";
 return info;
 }
 
-function keyBoardInfo() { //键盘信息 
+function keyBoardInfo() { //键盘信息
 var properties = service.ExecQuery("SELECT * FROM Win32_Keyboard");
 var e = new Enumerator(properties);
 var info = "<table border=1>";
@@ -331,7 +327,7 @@ info += "</table>";
 return info;
 }
 
-function mainBoard() { //主板信息 
+function mainBoard() { //主板信息
 var properties = service.ExecQuery("SELECT * FROM Win32_BaseBoard");
 var e = new Enumerator(properties);
 var info = "<table border=1>";
@@ -366,7 +362,7 @@ function raminfo() {
 var system = new Enumerator(service.ExecQuery("SELECT * FROM Win32_ComputerSystem")).item();
 
 var physicMenCap = Math.ceil(system.TotalPhysicalMemory / 1024 / 1024);
-//内存信息 
+//内存信息
 var memory = new Enumerator(service.ExecQuery("SELECT * FROM Win32_PhysicalMemory"));
 for (var mem = [], i = 0; !memory.atEnd(); memory.moveNext()) {
 mem[i++] = {
