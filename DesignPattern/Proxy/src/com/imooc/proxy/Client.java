@@ -17,7 +17,8 @@ public class Client {
 	// }
 
 	// 模拟JDK动态代理实现
-	public static void main(String[] args) {
-		Proxy.newProxyInstance(Moveable.class);
+	public static void main(String[] args) throws Exception {
+		Moveable m = (Moveable) Proxy.newProxyInstance(Moveable.class);
+		m.move();
 	}
 }
