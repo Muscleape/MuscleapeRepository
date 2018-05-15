@@ -13,28 +13,30 @@ import org.apache.commons.io.FileUtils;
 
 public class Proxy {
 	@SuppressWarnings({ "deprecation" })
-	public static Object newProxyInstance(Class infce) throws Exception {
+	public static Object newProxyInstance(Class infce,InvocationHandler h) throws Exception {
 		//1、声明一段源码，动态产生代理
 		//windows系统中的回车换行符\r\n
 		String rt = "\r\n";
 		String methodStr="";
 		for(Method m : infce.getMethods()) {
 			methodStr += "	@Override"+rt+
-			"	public void " + m.getName() +"() {"+rt+
-			"		System.out.println(\"日志开始。。。\");"+rt+
-			"		m." + m.getName() + "();"+rt+
-			"		System.out.println(\"日志结束。。。\");"+rt+
+			" public void " + m.getName() +"() {"+rt+
+			" try{"+rt+
+			" Method md = "+infce.getName()+".class.getMethod(\""+m.getName()+"\");"+rt+
+			" h.invoke(this,md);"+rt+
+			" }catch(Exception e){e.printStackTrace();}"+rt+
 			"	}";
 		}
 		
 		String str=
 		"package com.imooc.proxy;"+rt+
+		"import java.lang.reflect.Method;"+rt+
+		"import com.imooc.proxy.InvocationHandler;"+rt+
 		"public class $Proxy0 implements "+infce.getName()+ " {"+rt+
-		"	public $Proxy0("+infce.getName()+ " m) {"+rt+
-		"		super();"+rt+
-		"		this.m = m;"+rt+
+		"	public $Proxy0(InvocationHandler h) {"+rt+
+		"		this.h = h;"+rt+
 		"	}"+rt+
-		"	private "+infce.getName()+ " m;"+rt+
+		" private InvocationHandler h;"+rt+
 		methodStr+rt+
 		"}";
 		//2、编译源码（JDK Compiler API），
@@ -65,7 +67,7 @@ public class Proxy {
 		System.out.println(c.getName());
 		
 		//获取类的构造函数，创建类的实例
-		Constructor ctr = c.getConstructor(infce);
-		return ctr.newInstance(new Car());
+		Constructor ctr = c.getConstructor(InvocationHandler.class);
+		return ctr.newInstance(h);
 	}
 }
