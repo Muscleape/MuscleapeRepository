@@ -18,6 +18,6 @@ public class Client {
 
 	// 模拟JDK动态代理实现
 	public static void main(String[] args) {
-		Proxy.newProxyInstance();
+		Proxy.newProxyInstance(Moveable.class);
 	}
 }
