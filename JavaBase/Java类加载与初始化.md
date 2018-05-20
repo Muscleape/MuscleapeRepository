@@ -189,3 +189,179 @@ public class Toy {
 Class cc = Class.forName("Toy");//获得类（注意，需要使用包含包名的全限定名）
 Toy toy = (Toy)cc.newInstance();//相当于new一个对象，但是Toy类必须有默认的无参的构造方法
 ```
+
+##### 3.用**类字段常量**.class和Class.forName都可以创建爱你对类的应用，但是不同点在于，用Toy.class创建Class对象的的应用时，不会自动初始化该Class对象（static子句不会执行）；
+
+```java
+package classloader;
+
+/**
+ * @Description 测试用类
+ * @Author Muscleape
+ * @Date 2018年5月20日
+ */
+public class Test {
+
+    public static void main(String[] args) {
+
+        // try {
+        // // 执行完下面这一行，输出 Initializing
+        // Class<?> c = Class.forName("classloader.Toy");
+        // // 执行完下面这一行，输出 Building
+        // c.newInstance();
+        // } catch (InstantiationException | IllegalAccessException e) {
+        // // TODO Auto-generated catch block
+        // e.printStackTrace();
+        // } catch (ClassNotFoundException e) {
+        // // TODO Auto-generated catch block
+        // e.printStackTrace();
+        // }
+
+        Class c = Toy.class;// 不会输出任何值
+    }
+
+}
+```
+
+使用Toy.class是在编译期执行的，因此在编译期必须已经有了Toy的.class文件，不然会编译失败，这与Class.forName("Toy")不同，后者是运行时动态加载的。
+
+但是，如果该main()方法直接写在Toy类中，那么调用Toy.class会引起初始化，并输出Initializing，原因并不是Toy.class引起的，而是该类中含有启动方法main，该方法会导致Toy的初始化。
+
+##### 4.编译时常量。
+
+回到完整的Toy类，如果直接输出：System.out.println(Toy.price)，会发现static子句和构造方法都没有被执行，这是因为Toy中，常量price被 static final限定，这样的常量叫做**编译时常量**，对于这种编译时常量必须满足3个条件：static的、final的、常量。
+
+> 下面的几种**不是**编译时常量，对他们的应用，都会引起类的初始化：
+
+```java
+static int a;
+final int b;
+static final int c = ClassInitialization.rand.nextInt(100);
+static final int d;
+static {
+    d=5;
+}
+```
+
+##### 5.**static**块的本质
+
+```java
+package classloader;
+
+public class StaticBlock {
+    static final int c = 3;
+    static final int d;
+    static int e = 5;
+    static {
+        d = 5;
+        e = 10;
+        System.out.println("Initializing");
+    }
+
+    StaticBlock() {
+        System.out.println("Building");
+    }
+}
+```
+
+```java
+package classloader;
+
+public class StaticBlockTest {
+    public static void main(String[] args) {
+        System.out.println(StaticBlock.c);
+        System.out.println(StaticBlock.d);
+        System.out.println(StaticBlock.e);
+    }
+}
+```
+
+上述代码执行结果为：
+
+```shell
+3
+Initializing
+5
+10
+```
+
+> 原因分析：输出c时，由于c是编译时常量，不会引起类初始化，因此直接输出，输出d时，d不是编译时常量，所有会引起初始化操作，即static块的执行，于是d被赋值为5，e被赋值为10，然后输出Initializing，之后输出的为5，e为10。
+
+JDK会自动为e的初始化创建一个static块，所有上面的diam等价于：
+
+```java
+class StaticBlock2 {
+    static final int d;
+    static int e;
+    static {
+        e = 5;
+    }
+    static {
+        d = 5;
+        e = 10;
+        System.out.println("Initializing");
+    }
+
+    StaticBlock2() {
+        System.out.println("Building");
+    }
+}
+```
+
+可见，**按顺序执行**，e先被初始化为5，再被初始化为10，于是输出10。
+
+类似的，容易想到下面的代码：
+
+```java
+class StaticBlock3 {
+    static {
+        d = 5;
+        e = 10;
+        System.out.println("Initializing");
+    }
+    static final int d;
+    static int e = 5;
+
+    StaticBlock3() {
+        System.out.println("Building");
+    }
+}
+```
+
+在这段代码中，对e的声明被放到static块后面，于是，e会被先初始化为10，再被初始化为5，所以这段代码中e会输出为5。
+
+##### 6.《Java深度历险》第二章代码示例
+
+当访问一个Java类或者接口的静态域时，只有真正声明这个域的类或接口才会被初始化。
+
+```java
+package classloader;
+
+public class StaticBlock4 {
+    public static void main(String[] args) {
+        System.out.println(A.value);// 输出100
+    }
+}
+
+class B {
+    static int value = 100;
+    static {
+        System.out.println("Class B is initialized");// 输出
+    }
+}
+
+class A extends B {
+    static {
+        System.out.println("Class A is initialized");// 不输出
+    }
+}
+```
+
+输出结果：
+
+```java
+Class B is initialized
+100
+```
+
+在该例子中，虽然通过A来引用了value，但是value是在父类B中声明的，所以只会初始化B，而不会引起A的初始化。
