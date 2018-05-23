@@ -43,3 +43,21 @@ Class<?> c = Class.forName(args[0]);
 OfficeIntf oa = (OfficeIntf) c.newInstance();//接口
 oa.start();
 ```
+
+## Java方法的反射
+
+1. 方法的名称和方法的参数列表唯一决定某个方法；
+2. method.invoke(对象,参数列表);
+
+## 通过反射了解集合泛型的本质
+
+1. 编译之后集合的泛型是去泛型化的；
+2. Java中集合的泛型，是防止错误输入的，只在编译阶段有效，绕过编译就无效了；
+
+```java
+ArrayList a1 = new ArrayList();
+ArrayList<String> a2 = new ArrayList<String>();
+Class c1 = a1.getClass();
+Class c2 = a2.getClass();
+System.out.println(a1==a2);//结果为true
+```
