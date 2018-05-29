@@ -3,6 +3,7 @@
 1. 业务接口
 2. 实现了业务接口的业务类
 3. 实现了InvocationHandler接口的handler代理类
+4. Client端，即次Demo中的代理类中获取实例对象的部分，**Proxy.newProxyInstance**方法
 
 > 1、业务接口
 
