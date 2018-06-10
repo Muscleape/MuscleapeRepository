@@ -13,13 +13,13 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="D:/Projects/0jar/jstl-1.2.jar"/>
-	<classpathentry kind="lib" path="D:/Projects/0jar/mysql-connector-java-8.0.9-rc.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/mybatis-3.4.6.jar" sourcepath="D:/Projects/0jar/mybatis-3-mybatis-3.4.6">
 		<attributes>
 			<attribute name="source_encoding" value="UTF-8"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="D:/Projects/Java/0jar/jstl-1.2.jar"/>
+	<classpathentry kind="lib" path="D:/Projects/Java/0jar/mysql-connector-java-8.0.9-rc.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
