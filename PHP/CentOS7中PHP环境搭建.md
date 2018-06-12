@@ -1,12 +1,15 @@
-# CentOS7中PHP环境搭建
+# CentOS7中PHP环境（Nginx服务器）搭建
 
 > MySQL数据库的安装这里不再赘述，只记录PHP及Nginx服务器的安装及配置过程
+>
+> **注意，十分重要：**如果需要使用Apache服务器，先使用yum安装httpd和httpd-devel，然后再编译安装PHP，编译时使用配置：--with-apxs2=/usr/bin/apxs，该配置是添加Apache对php的支持，php编译安装完成后会在httpd.conf配置文件中自动添加一行配置项： LoadModule php5_module        /usr/lib64/httpd/modules/libphp5.so
 >
 >涉及到的配置文件
 >vim /usr/local/etc/php-fpm.conf
 >
 >vim /usr/local/nginx/conf/nginx.conf
 >
+>php查看之前的编译参数可以使用命令：php -i | grep configure
 
 ## 1、安装并配置MySQL（或其他）数据库
 
@@ -58,7 +61,7 @@ cd php-5.6.2
 其中第二个参数为mysql.h文件的路径
 
 ```shell
-[root@z php-5.6.2]# ./configure --enable-fpm --enable-mbstring --with-mysql=/usr --enable-pdo --with-pdo-mysql
+[root@z php-5.6.2]# ./configure --enable-fpm --enable-mbstring --with-mysql=/usr --enable-pdo --with-pdo-mysql --with-apxs2=/usr/bin/apxs
 ```
 
 >--enable-fpm的作用是开启php的fastcgi功能即开启php-fpm功能;
@@ -66,6 +69,8 @@ cd php-5.6.2
 >--with-mysql=/usr/local/mysql是启用php支持mysql的功能，/usr/local/mysql是mysql数据库的安装路径，找到mysql.h文件的路径即可;
 >
 >--enable-mbstring表示启用mbstring模块,mbstring模块的主要作用在于检测和转换编码，提供对应的多字节操作的字符串函数。目前php内部的编码只支持ISO-8859-*、EUC-JP、UTF-8，其他的编码的语言是没办法在php程序上正确显示的，所以我们要启用mbstring模块。
+>
+>--with-apxs2=/usr/bin/apxs的作用是配置Apache服务器的支持，避免Apache直接将php文件内容不解析直接输出的问题；
 >
 >同时我们也只是简单的开启和扩展php的一部分功能，其他需要的功能，请自行添加;
 
